@@ -1,7 +1,8 @@
-image=zImage
+image=/boot/zImage
 fdt_file=dts/imx6q-udoo-hdmi.dtb
 mmcroot=/dev/mmcblk0p1
-console_arg=console=ttymxc0,115200
+console_arg=console=ttymxc1,115200
 ssh_arg=ssh
+video=mxcfb0:dev=hdmi,1920x1080M@60,bpp=32
 mmcargs=setenv bootargs ${console_arg} root=${mmcroot} memory=fbmem=24M gpu_reserved=128M video=${video}
 
