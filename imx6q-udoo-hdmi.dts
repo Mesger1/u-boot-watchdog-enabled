@@ -1,0 +1,72 @@
+/*
+ * Copyright 2013 Freescale Semiconductor, Inc.
+ *
+ * Author: Fabio Estevam <fabio.estevam@freescale.com>
+ * Author: Ettore Chimenti <ettore.chimenti@udoo.org>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ */
+
+/dts-v1/;
+#include "imx6q.dtsi"
+#include "imx6qdl-udoo.dtsi"
+#include "imx6qdl-udoo-externalpins.dtsi"
+
+/ {
+	model = "UDOO Quad Board";
+	compatible = "udoo,imx6q-udoo", "fsl,imx6q";
+	
+	mxcfb1: fb@0 {
+		compatible = "fsl,mxc_sdc_fb";
+		disp_dev = "hdmi";
+		interface_pix_fmt = "RGB24";
+		mode_str ="1920x1080M@60";
+		default_bpp = <32>;
+		int_clk = <0>;
+		late_init = <0>;
+		status = "okay";
+	};
+};	
+
+&sata {
+	status = "okay";
+};
+
+&iomuxc {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_hog &external_hog>;
+	
+	imx6q-udoo {
+		pinctrl_uart3: uart3grp
+		{
+			fsl,pins = <
+				MX6QDL_PAD_EIM_D24__UART3_TX_DATA 	0x1b0b1
+				MX6QDL_PAD_EIM_D25__UART3_RX_DATA	0x1b0b1
+			>;
+		};
+
+		pinctrl_uart5: uart5grp
+		{
+			fsl,pins = <
+				MX6QDL_PAD_KEY_ROW1__UART5_RX_DATA 	0x1b0b1
+				MX6QDL_PAD_KEY_COL1__UART5_TX_DATA 	0x1b0b1
+			>;
+		};
+	};
+};
+
+&uart3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart3>;
+	status = "okay";
+};
+
+&uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart5>;
+	status = "okay";
+};
+

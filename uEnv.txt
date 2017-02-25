@@ -1,34 +1,7 @@
-image=/boot/uImage
+image=zImage
+fdt_file=dts/imx6q-udoo-hdmi.dtb
 mmcroot=/dev/mmcblk0p1
-
-
-# enable only one video section
-
-# HDMI
-video=mxcfb0:dev=hdmi,1920x1080M@60,bpp=32
-
-# 7" LVDS
-#video=mxcfb0:dev=ldb,800x480M@60,if=RGB666,bpp=32
-#fdt_file=imx6q-udoo-7lvds.dtb
-#fdt_file=imx6dl-udoo-7lvds.dtb
-
-# 15.6" LVDS
-#video=mxcfb0:dev=ldb,1360x768M@60,if=RGB24,bpp=32
-#fdt_file=imx6q-udoo-15lvds.dtb
-#fdt_file=imx6dl-udoo-15lvds.dtb
-
-# make boot more quiet
-# console_arg=quiet morequiet
-# or having quiet and serial console
-#console_arg=console=ttymxc0,115200 quiet morequiet
-# show messages in serial console
-console_arg=console=ttymxc0,115200                     
-
-# enable ssh
+console_arg=console=ttymxc0,115200
 ssh_arg=ssh
-
-# enable debugging (kodi debug)
-#debugging_arg=debugging     
-
 mmcargs=setenv bootargs ${console_arg} root=${mmcroot} memory=fbmem=24M gpu_reserved=128M video=${video}
 
